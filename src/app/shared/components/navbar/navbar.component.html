@@ -1,0 +1,14 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <h1>Welcome back, 
+        <span class="text-customHsl-accent">{{userService.getUser().name}}</span>
+    </h1>
+  </div>
+  <div class="navbar-menu">
+    @if (userService.isLoggedIn()) {
+        <button (click)="userService.deleteUserAccount()" class="nav-button">
+            Delete User
+        </button>
+        }
+  </div>
+</nav>

@@ -1,0 +1,17 @@
+<div class="signup-container">
+    <form [formGroup]="signUpForm">
+      <div class="form-group">
+        <label for="name"></label>
+        <input 
+          id="name"
+          type="text" 
+          formControlName="name"
+          placeholder="Enter Your Name">
+        <div class="error" *ngIf="signUpForm.get('name')?.touched && signUpForm.get('name')?.errors?.['required']">
+          Name field is required
+        </div>
+      </div>
+  
+      <button type="button" (click)="signUp()" [disabled]="signUpForm.invalid">Sign Up</button>
+    </form>
+</div>
