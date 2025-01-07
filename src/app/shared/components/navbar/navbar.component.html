@@ -1,0 +1,16 @@
+<nav class="navbar">
+  @if (userService.getUser()?.name) {
+    <div class="navbar-brand">
+      <h1>Welcome back, 
+          <span class="username">{{userService.getUser().name}}</span>
+      </h1>
+    </div>
+    <div class="navbar-menu">
+      @if (userService.isLoggedIn()) {
+          <button (click)="userService.deleteUserAccount()" class="nav-button">
+              Delete User
+          </button>
+      }
+    </div>
+  }
+</nav>

@@ -1,0 +1,15 @@
+<div *ngIf="contact" class="contact-card">
+  <div class="contact-header">
+    <h2>{{ contact.firstname }} {{ contact.lastname }}</h2>
+  </div>
+  <div class="contact-body">
+    <p><strong>Email:</strong> {{ contact.email }}</p>
+    <p><strong>Phone:</strong> {{ contact.phone }}</p>
+    <p><strong>Date of Birth:</strong> {{ contact.dateofbirth | date }}</p>
+    <p><strong>Address:</strong> {{ contact.address }}</p>
+  </div>
+  <div class="contact-footer">
+    <button (click)="deleteContact(contact.id)" class="btn btn-danger">Delete</button>
+    <button (click)="goBack()" class="btn btn-secondary">Go Back</button>
+  </div>
+</div>
