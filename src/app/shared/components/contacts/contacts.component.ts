@@ -21,7 +21,7 @@ export class ContactsComponent implements OnInit {
 
   contacts: Contact[] = [];
   selectedContactId: string | null = null;
-  isEditing: boolean = false;
+  isEditing = false;
 
   searchForm: FormGroup = new FormGroup({
     searchControl: new FormControl('')
@@ -31,10 +31,7 @@ export class ContactsComponent implements OnInit {
     firstname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastname: new FormControl('', [Validators.required, Validators.minLength(2)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^\+380\d{9}$/) 
-    ]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^\+380\d{9}$/)]),
     dateofbirth: new FormControl('', [Validators.required, this.dateValidator.bind(this)]),
     address: new FormControl('', [Validators.required, Validators.minLength(3)])
   });
@@ -117,18 +114,18 @@ export class ContactsComponent implements OnInit {
 
   private setupSearchSubscription(): void {
     const searchControl = this.searchForm.get('searchControl');
-    searchControl?.valueChanges.subscribe(query => this.updateContactList(query));
+    searchControl?.valueChanges.subscribe((query) => this.updateContactList(query));
   }
-  
+
   private updateContactList(query: string): void {
     this.contacts = query ? this.contactService.searchContacts(query) : this.contactService.getContacts();
   }
 
-  private dateValidator(control: FormControl): { [key: string]: boolean } | null {
+  private dateValidator(control: FormControl): Record<string, boolean> | null {
     const date = new Date(control.value);
     const today = new Date();
     if (date >= today) {
-      return { 'invalidDate': true };
+      return { invalidDate: true };
     }
     return null;
   }

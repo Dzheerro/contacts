@@ -1,5 +1,5 @@
 <nav class="navbar">
-  @if (userService.getUser()?.name) {
+  @if (userService.getUser().name) {
     <div class="navbar-brand">
       <h1>Welcome back, 
           <span class="username">{{userService.getUser().name}}</span>

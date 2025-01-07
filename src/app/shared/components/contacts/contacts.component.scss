@@ -68,7 +68,7 @@
         display: flex;
         justify-content: space-between;
         margin-top: 1rem;
-
+    
         button {
             padding: 0.8rem;
             border: none;
@@ -79,11 +79,16 @@
             cursor: pointer;
             flex: 1;
             margin: 0 0.5rem;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
             transition: background-color 0.5s ease;
+    
+            &:hover {
+                background-color: #0056b3;
+            }
+    
+            &:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
         }
     }
     }
