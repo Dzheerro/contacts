@@ -8,5 +8,10 @@ export const routes: Routes = [
     loadComponent: () => import('./shared/components/contacts/contacts.component').then((c) => c.ContactsComponent),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'contact/:id',
+    loadComponent: () => import('./shared/components/contact-detail/contact-detail.component').then((c) => c.ContactDetailComponent),
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: 'contacts' }
 ];

@@ -1,0 +1,9 @@
+<div *ngIf="contact">
+  <h2>{{ contact.firstname }} {{ contact.lastname }}</h2>
+  <p>{{ contact.email }}</p>
+  <p>{{ contact.phone }}</p>
+  <p>{{ contact.dateofbirth }}</p>
+  <p>{{ contact.address }}</p>
+
+  <button (click)="deleteContact(contact.id)">Delete</button>
+</div>

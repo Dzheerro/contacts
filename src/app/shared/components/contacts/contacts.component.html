@@ -1,1 +1,47 @@
-<p>contacts works!</p>
+<form [formGroup]="contactForm">
+  <div>
+    <label for="firstname">First Name:</label>
+    <input id="firstname" type="text" formControlName="firstname" placeholder="Enter first name" />
+  </div>
+
+  <div>
+    <label for="lastname">Last Name:</label>
+    <input id="lastname" type="text" formControlName="lastname" placeholder="Enter last name" />
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" placeholder="Enter email" />
+  </div>
+
+  <div>
+    <label for="phone">Phone:</label>
+    <input id="phone" type="tel" formControlName="phone" placeholder="Enter phone number" />
+  </div>
+
+  <div>
+    <label for="dateofbirth">Date of Birth:</label>
+    <input id="dateofbirth" type="date" formControlName="dateofbirth" />
+  </div>
+
+  <div>
+    <label for="address">Address:</label>
+    <input id="address" type="text" formControlName="address" placeholder="Enter address" />
+  </div>
+
+  <button (click)="addContact()" type="submit">Add Contact</button>
+</form>
+
+<h2>Contact List</h2>
+<ul>
+  <li *ngFor="let contact of contacts">
+    <strong>{{ contact.firstname }} {{ contact.lastname }}</strong><br>
+    Email: {{ contact.email }}<br>
+    Phone: {{ contact.phone }}<br>
+    Date of Birth: {{ contact.dateofbirth | date }}<br>
+    Address: {{ contact.address }}
+
+    <button (click)="contactService.deleteContact(contact.id)">Delete Contact</button>
+    <button (click)="viewDetails(contact.id)">View Details</button>
+  </li>
+</ul>
