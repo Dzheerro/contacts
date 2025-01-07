@@ -1,0 +1,56 @@
+.contact-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .contact-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+  }
+
+  .contact-body {
+    p {
+      margin: 8px 0;
+      font-size: 16px;
+      color: #555;
+    }
+
+    strong {
+      color: #333;
+    }
+  }
+
+  .contact-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &.btn-danger {
+        background-color: #d9534f;
+        color: #fff;
+      }
+
+      &.btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+      }
+    }
+  }
+}

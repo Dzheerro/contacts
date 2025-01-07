@@ -1,47 +1,101 @@
-<form [formGroup]="contactForm">
-  <div>
-    <label for="firstname">First Name:</label>
-    <input id="firstname" type="text" formControlName="firstname" placeholder="Enter first name" />
+<div class="search-box">
+  <form [formGroup]="searchForm">
+      <input id="search" type="text" formControlName="searchControl" placeholder="Search by name or phone" />
+  </form>
+</div>
+
+
+<div class="container">
+  <div class="container__form">
+    <form [formGroup]="contactForm">
+      <div class="form-group" [ngClass]="{'has-error': contactForm.get('firstname')?.invalid && contactForm.get('firstname')?.touched}">
+        <label for="firstname">First Name:</label>
+        <input id="firstname" type="text" formControlName="firstname" placeholder="Enter first name" />
+        <div *ngIf="contactForm.get('firstname')?.invalid && contactForm.get('firstname')?.touched" class="error-message">
+          First name is required and must be at least 2 characters.
+        </div>
+      </div>
+    
+      <div class="form-group" [ngClass]="{'has-error': contactForm.get('lastname')?.invalid && contactForm.get('lastname')?.touched}">
+        <label for="lastname">Last Name:</label>
+        <input id="lastname" type="text" formControlName="lastname" placeholder="Enter last name" />
+        <div *ngIf="contactForm.get('lastname')?.invalid && contactForm.get('lastname')?.touched" class="error-message">
+          Last name is required and must be at least 2 characters.
+        </div>
+      </div>
+    
+      <div class="form-group" [ngClass]="{'has-error': contactForm.get('email')?.invalid && contactForm.get('email')?.touched}">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" placeholder="Enter email" />
+        <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="error-message">
+          Please enter a valid email address.
+        </div>
+      </div>
+    
+      <div class="form-group" [ngClass]="{'has-error': contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched}">
+        <label for="phone">Ukrainian Phone:</label>
+        <input id="phone" type="tel" formControlName="phone" placeholder="Enter phone number (+380...)" />
+        <div *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched" class="error-message">
+          Phone number must be in the format +380XXXXXXXXX.
+        </div>
+      </div>
+    
+      <div class="form-group" [ngClass]="{'has-error': contactForm.get('dateofbirth')?.invalid && contactForm.get('dateofbirth')?.touched}">
+        <label for="dateofbirth">Date of Birth:</label>
+        <input id="dateofbirth" type="date" formControlName="dateofbirth" />
+        <div *ngIf="contactForm.get('dateofbirth')?.invalid && contactForm.get('dateofbirth')?.touched" class="error-message">
+          Date of birth must be in the past.
+        </div>
+      </div>
+    
+      <div class="form-group" [ngClass]="{'has-error': contactForm.get('address')?.invalid && contactForm.get('address')?.touched}">
+        <label for="address">Address:</label>
+        <input id="address" type="text" formControlName="address" placeholder="Enter address" />
+        <div *ngIf="contactForm.get('address')?.invalid && contactForm.get('address')?.touched" class="error-message">
+          Address is required and must be at least 5 characters.
+        </div>
+      </div>
+    
+      <div class="button-group">
+        <button *ngIf="!isEditing" (click)="addContact()" type="submit" [disabled]="contactForm.invalid">Add Contact</button>
+        <button *ngIf="isEditing" (click)="updateContact()" type="button" [disabled]="contactForm.invalid">Update Contact</button>
+        <button *ngIf="isEditing" (click)="cancelEdit()" type="button">Cancel</button>
+      </div>
+    </form>
   </div>
 
-  <div>
-    <label for="lastname">Last Name:</label>
-    <input id="lastname" type="text" formControlName="lastname" placeholder="Enter last name" />
+
+  <div class="container__contacts">
+    <ul>
+      <li *ngIf="contacts.length === 0">No contacts available yet.</li>
+      <li *ngFor="let contact of contacts">
+        <strong>{{ contact.firstname }} {{ contact.lastname }}</strong><br>
+        Email: {{ contact.email }}<br>
+        Phone: {{ contact.phone }}<br>
+        Date of Birth: {{ contact.dateofbirth | date }}<br>
+    
+        <div class="contact-actions">
+          <button (click)="contactService.deleteContact(contact.id)">
+            <i class="fas fa-trash-alt"></i> Delete Contact
+          </button>
+          <button (click)="viewDetails(contact.id)">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button (click)="editContact(contact.id)">
+            <i class="fas fa-edit"></i> Edit Contact
+          </button>
+        </div>
+      </li>
+    </ul>
   </div>
+</div>
 
-  <div>
-    <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email" placeholder="Enter email" />
-  </div>
 
-  <div>
-    <label for="phone">Phone:</label>
-    <input id="phone" type="tel" formControlName="phone" placeholder="Enter phone number" />
-  </div>
 
-  <div>
-    <label for="dateofbirth">Date of Birth:</label>
-    <input id="dateofbirth" type="date" formControlName="dateofbirth" />
-  </div>
 
-  <div>
-    <label for="address">Address:</label>
-    <input id="address" type="text" formControlName="address" placeholder="Enter address" />
-  </div>
 
-  <button (click)="addContact()" type="submit">Add Contact</button>
-</form>
 
-<h2>Contact List</h2>
-<ul>
-  <li *ngFor="let contact of contacts">
-    <strong>{{ contact.firstname }} {{ contact.lastname }}</strong><br>
-    Email: {{ contact.email }}<br>
-    Phone: {{ contact.phone }}<br>
-    Date of Birth: {{ contact.dateofbirth | date }}<br>
-    Address: {{ contact.address }}
 
-    <button (click)="contactService.deleteContact(contact.id)">Delete Contact</button>
-    <button (click)="viewDetails(contact.id)">View Details</button>
-  </li>
-</ul>
+
+
+
