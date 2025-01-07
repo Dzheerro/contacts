@@ -28,7 +28,7 @@ export class ContactService {
           firstname: 'John',
           lastname: 'Doe',
           email: 'john.doe@example.com',
-          phone: '123-456-7890',
+          phone: '+380987654321',
           dateofbirth: new Date('1990-01-01'),
           address: '123 Main St'
         },
@@ -37,7 +37,7 @@ export class ContactService {
           firstname: 'Jane',
           lastname: 'Smith',
           email: 'jane.smith@example.com',
-          phone: '098-765-4321',
+          phone: '+380987654321',
           dateofbirth: new Date('1985-05-15'),
           address: '456 Elm St'
         },
@@ -46,7 +46,7 @@ export class ContactService {
           firstname: 'Alice',
           lastname: 'Johnson',
           email: 'alice.johnson@example.com',
-          phone: '555-555-5555',
+          phone: '+380987654321',
           dateofbirth: new Date('1992-07-20'),
           address: '789 Oak St'
         }
@@ -59,18 +59,19 @@ export class ContactService {
   searchContacts(query: string): Contact[] {
     const contacts = this.getContacts();
     const lowerCaseQuery = query.toLowerCase();
-    return contacts.filter(contact => 
-      contact.firstname.toLowerCase().includes(lowerCaseQuery) ||
-      contact.lastname.toLowerCase().includes(lowerCaseQuery) ||
-      contact.phone.includes(query)
+    return contacts.filter(
+      (contact) =>
+        contact.firstname.toLowerCase().includes(lowerCaseQuery) ||
+        contact.lastname.toLowerCase().includes(lowerCaseQuery) ||
+        contact.phone.includes(query)
     );
   }
 
   updateContact(updatedContact: Contact) {
     const contacts = this.getContacts();
     const contact = this.getContactById(updatedContact.id);
-    const index = contacts.findIndex(c => c.id === contact.id);
-    
+    const index = contacts.findIndex((c) => c.id === contact.id);
+
     if (index !== -1) {
       contacts[index] = updatedContact;
       this.setContacts(contacts);
